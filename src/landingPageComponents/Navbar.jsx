@@ -69,7 +69,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 w-full z-50 font-['Noto_Sans'] transition-all duration-300 ${
         isScrolled 
           // Changed to a semi-transparent white background for the "glassmorphism" effect on scroll
-          ? "bg-[#001f3f] shadow-lg shadow-black/20"
+          ? "bg-white shadow-lg shadow-black/20"
           : "bg-transparent"
       }`}
     >

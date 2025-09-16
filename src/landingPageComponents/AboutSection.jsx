@@ -3,141 +3,197 @@ import { motion } from 'framer-motion';
 import { FiUsers, FiMap, FiMessageSquare, FiSmartphone, FiArrowRight } from 'react-icons/fi';
 
 const SuperInteractiveAbout = () => {
-  // Updated features array with new theme colors
-  const features = [
-    {
-      icon: <FiUsers size={28} className="text-[#0d47a1]" />,
-      title: "Citizen Reporting",
-      description: "Submit geotagged reports, photos, and videos of ocean hazards directly through the app."
-    },
-    {
-      icon: <FiMap size={28} className="text-[#0d47a1]" />,
-      title: "Live Dashboard",
-      description: "Visualize real-time crowdsourced data and social media trends on a dynamic, interactive map."
-    },
-    {
-      icon: <FiMessageSquare size={28} className="text-[#0d47a1]" />,
-      title: "Social Media Integration",
-      description: "Our NLP engine analyzes social media feeds to detect hazard-related discussions and public sentiment."
-    },
-    {
-      icon: <FiSmartphone size={28} className="text-[#0d47a1]" />,
-      title: "Enhanced Awareness",
-      description: "Empower emergency responders with faster, more accurate situational awareness."
-    }
-  ];
+  // Configuration array to programmatically generate blobs
+  const blobConfigurations = [
+    // ... (blob configuration array remains the same)
+    { classes: 'w-[600px] h-[600px] top-[-5%] left-[-10%] opacity-60', color: '#cfe0ff' },
+    { classes: 'w-[700px] h-[700px] top-[20%] right-[-15%] opacity-50', color: '#f1ddff' },
+    { classes: 'w-[600px] h-[600px] bottom-[-15%] left-[5%] opacity-50', color: '#dff7ee' },
+    { classes: 'w-[400px] h-[400px] top-[5%] right-[15%] opacity-70', color: '#f1ddff' },
+    { classes: 'w-[350px] h-[350px] top-[45%] left-[30%] opacity-40', color: '#cfe0ff' },
+    { classes: 'w-[450px] h-[450px] bottom-[5%] right-[10%] opacity-60', color: '#dff7ee' },
+    { classes: 'w-[200px] h-[200px] top-[15%] left-[40%] opacity-50', color: '#dff7ee' },
+    { classes: 'w-[250px] h-[250px] top-[70%] left-[50%] opacity-70', color: '#f1ddff' },
+    { classes: 'w-[220px] h-[220px] bottom-[20%] left-[25%] opacity-50', color: '#cfe0ff' },
+    { classes: 'w-[180px] h-[180px] top-[25%] right-[35%] opacity-60', color: '#dff7ee' },
+    { classes: 'w-[300px] h-[300px] bottom-[5%] right-[40%] opacity-40', color: '#cfe0ff' },
+    { classes: 'w-[250px] h-[250px] top-[-10%] right-[30%] opacity-50', color: '#f1ddff' },
+    { classes: 'w-[200px] h-[200px] bottom-[-5%] left-[45%] opacity-60', color: '#dff7ee' },
+    { classes: 'w-[150px] h-[150px] top-[50%] left-[5%] opacity-70', color: '#cfe0ff' },
+    { classes: 'w-[280px] h-[280px] top-[80%] right-[20%] opacity-50', color: '#f1ddff' },
+    { classes: 'w-[190px] h-[190px] top-[5%] left-[15%] opacity-60', color: '#dff7ee' },
+    { classes: 'w-[210px] h-[210px] bottom-[30%] right-[-5%] opacity-70', color: '#cfe0ff' },
+    { classes: 'w-[260px] h-[260px] top-[60%] left-[70%] opacity-50', color: '#f1ddff' },
+    { classes: 'w-[180px] h-[180px] top-[90%] left-[30%] opacity-60', color: '#dff7ee' },
+    { classes: 'w-[240px] h-[240px] top-[35%] left-[5%] opacity-50', color: '#cfe0ff' },
+    { classes: 'w-[200px] h-[200px] top-[-5%] left-[50%] opacity-60', color: '#f1ddff' },
+    { classes: 'w-[300px] h-[300px] bottom-[40%] right-[25%] opacity-40', color: '#dff7ee' },
+    { classes: 'w-[150px] h-[150px] top-[75%] left-[15%] opacity-70', color: '#cfe0ff' },
+    { classes: 'w-[250px] h-[250px] top-[55%] right-[45%] opacity-50', color: '#f1ddff' },
+    { classes: 'w-[220px] h-[220px] bottom-[15%] left-[65%] opacity-60', color: '#dff7ee' },
+    { classes: 'w-[190px] h-[190px] top-[40%] right-[5%] opacity-70', color: '#cfe0ff' },
+  ];
 
-  const cardVariants = {
-    offscreen: { opacity: 0, y: 50 },
-    onscreen: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", stiffness: 100, damping: 20 }
-    }
+  const features = [
+    { icon: <FiUsers size={28} className="text-[#0d47a1]" />, title: "Citizen Reporting", description: "Submit geotagged reports, photos, and videos of ocean hazards directly through the app." },
+    { icon: <FiMap size={28} className="text-[#0d47a1]" />, title: "Live Dashboard", description: "Visualize real-time crowdsourced data and social media trends on a dynamic, interactive map." },
+    { icon: <FiMessageSquare size={28} className="text-[#0d47a1]" />, title: "Social Media Integration", description: "Our NLP engine analyzes social media feeds to detect hazard-related discussions and public sentiment." },
+    { icon: <FiSmartphone size={28} className="text-[#0d47a1]" />, title: "Enhanced Awareness", description: "Empower emergency responders with faster, more accurate situational awareness." }
+  ];
+
+  const cardVariants = {
+    offscreen: { opacity: 0, y: 50 },
+    onscreen: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } }
+  };
+
+  // ADDED: Reusable hover animation for cards
+  const interactiveCardAnimation = {
+    scale: 1.03,
+    y: -5,
+    transition: { type: "spring", stiffness: 300, damping: 20 }
   };
 
-  return (
-    <section 
-      id="about" 
-      // Changed to a light background with dark text
-      className="relative text-gray-800 py-24 px-4 overflow-hidden bg-gray-50"
-    >
-      <div className="relative z-10 container mx-auto max-w-7xl">
-        <div className="text-center max-w-4xl mx-auto mb-20">
-          <motion.h2 
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4"
-          >
-            When the Ocean Threatens, Every Sighting Matters.
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            // Changed text color for light theme
-            className="text-lg md:text-xl text-gray-600"
-          >
-            We are the bridge across the critical gap between a scientific forecast and the real-time reality our communities face.
-          </motion.p>
-        </div>
+  return (
+    <section 
+      id="about" 
+      className="relative isolate text-gray-800 py-24 px-4 overflow-hidden bg-gray-50"
+    >
+      <div className="absolute inset-0 -z-10 w-full h-full">
+        <svg
+          className="absolute top-0 left-0 w-full"
+          viewBox="0 0 1440 320"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="#e9e4ff" 
+            fillOpacity="1"
+            d="M0,64L48,85.3C96,107,192,149,288,160C384,171,480,149,576,144C672,139,768,149,864,170.7C960,192,1056,224,1152,208C1248,192,1344,128,1392,96L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+          ></path>
+        </svg>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-16 mb-20">
-          <div className="lg:sticky top-24 h-fit">
-            {/* Changed card styling to light theme */}
-            <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-200">
-              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#0d47a1] to-[#6a1b9a] text-transparent bg-clip-text inline-block">The Problem</h3>
-              <p className="text-gray-600 leading-relaxed text-lg">
-                During ocean emergencies, authorities have the data, but communities have the live view. On-the-ground reports are often delayed or lost, and the public’s voice on social media goes untapped.
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-8 mt-12 lg:mt-0">
-            <h3 className="text-3xl font-bold mb-4 text-center lg:text-left">Our Solution</h3>
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                // Changed feature card styling to light theme
-                className="bg-white p-6 rounded-xl flex items-start space-x-4 border border-gray-200 shadow-lg"
-                initial="offscreen"
-                whileInView="onscreen"
-                viewport={{ once: false, amount: 0.5 }} 
-                variants={cardVariants}
-              >
-                {/* Changed icon container styling */}
-                <div className="bg-blue-50 p-4 rounded-full mt-1">
-                  {feature.icon}
-                </div>
-                <div>
-                  <h4 className="font-bold text-xl mb-1 text-gray-900">{feature.title}</h4>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        {blobConfigurations.map((blob, index) => (
+          <div
+            key={index}
+            className={`absolute filter blur-2xl rounded-full ${blob.classes}`}
+            style={{
+              background: `radial-gradient(circle, ${blob.color} 0%, transparent 80%)`,
+            }}
+          />
+        ))}
         
-        {/* Impact Section */}
-        <motion.div 
-          className="max-w-4xl mx-auto text-center"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: false, amount: 0.5 }}
-          variants={cardVariants}
+        {/* ADDED: Bottom wave SVG */}
+        <svg
+            className="absolute bottom-0 left-0 w-full"
+            viewBox="0 0 1440 320"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
         >
-          {/* Changed card styling to light theme */}
-          <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-200">
-            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#0d47a1] to-[#6a1b9a] text-transparent bg-clip-text inline-block">The Impact</h3>
-            <p className="text-gray-600 leading-relaxed text-lg">
-              We deliver a live, interactive map of developing situations to authorities. This allows them to validate threats faster, understand the scale of an event, and deploy resources where they are needed most—saving lives and property.
-            </p>
-          </div>
-        </motion.div>
+            <path
+                fill="#e9e4ff"
+                fillOpacity="1"
+                d="M0,224L48,218.7C96,213,192,203,288,186.7C384,171,480,149,576,154.7C672,160,768,192,864,218.7C960,245,1056,267,1152,256C1248,245,1344,203,1392,181.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></path>
+        </svg>
+      </div>
 
-        {/* Call to Action */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          <a
-            href="#dashboard"
-            // Changed button to new gradient with light text
-            className="inline-flex items-center text-xl font-semibold px-8 py-4 rounded-full bg-gradient-to-r from-[#0d47a1] to-[#6a1b9a] text-white transition-transform duration-300 hover:scale-105 shadow-lg hover:shadow-indigo-500/40"
+      <div className="relative z-10 container mx-auto max-w-7xl">
+        <div className="text-center max-w-4xl mx-auto mb-20">
+          <motion.h2 
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4"
+          >
+            When the Ocean Threatens, Every Sighting Matters.
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-lg md:text-xl text-gray-600"
+          >
+            We are the bridge across the critical gap between a scientific forecast and the real-time reality our communities face.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-16 mb-20">
+          <div className="lg:sticky top-24 h-fit">
+            {/* ADDED: Hover animation */}
+            <motion.div 
+              className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-gray-200"
+              whileHover={interactiveCardAnimation}
+            >
+              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#0d47a1] to-[#6a1b9a] text-transparent bg-clip-text inline-block">The Problem</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                During ocean emergencies, authorities have the data, but communities have the live view. On-the-ground reports are often delayed or lost, and the public’s voice on social media goes untapped.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="space-y-8 mt-12 lg:mt-0">
+            <h3 className="text-3xl font-bold mb-4 text-center lg:text-left">Our Solution</h3>
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl flex items-start space-x-4 border border-gray-200 shadow-lg"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: false, amount: 0.5 }} 
+                variants={cardVariants}
+                // ADDED: Hover animation
+                whileHover={interactiveCardAnimation}
+              >
+                <div className="bg-blue-50 p-4 rounded-full mt-1">
+                  {feature.icon}
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl mb-1 text-gray-900">{feature.title}</h4>
+                  <p className="text-gray-600">{feature.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        
+        <motion.div 
+          className="max-w-4xl mx-auto text-center"
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: false, amount: 0.5 }}
+          variants={cardVariants}
+        >
+          {/* ADDED: Hover animation */}
+          <motion.div 
+            className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-xl border border-gray-200"
+            whileHover={interactiveCardAnimation}
           >
-            See Our Platform in Action <FiArrowRight className="ml-2" />
-          </a>
-        </motion.div>
+            <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#0d47a1] to-[#6a1b9a] text-transparent bg-clip-text inline-block">The Impact</h3>
+            <p className="text-gray-600 leading-relaxed text-lg">
+              We deliver a live, interactive map of developing situations to authorities. This allows them to validate threats faster, understand the scale of an event, and deploy resources where they are needed most—saving lives and property.
+            </p>
+          </motion.div>
+        </motion.div>
 
-      </div>
-    </section>
-  );
+        <motion.div 
+          className="text-center mt-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          <a
+            href="#dashboard"
+            className="inline-flex items-center text-xl font-semibold px-8 py-4 rounded-full bg-gradient-to-r from-[#0d47a1] to-[#6a1b9a] text-white transition-transform duration-300 hover:scale-105 shadow-lg hover:shadow-indigo-500/40"
+          >
+            See Our Platform in Action <FiArrowRight className="ml-2" />
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default SuperInteractiveAbout;
