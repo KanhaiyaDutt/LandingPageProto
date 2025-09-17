@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from '../assets/logo.png'; // Assuming logo.png is directly in assets folder
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,17 +68,21 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 font-['Noto_Sans'] transition-all duration-300 ${
-        isScrolled 
+        isScrolled
           // Changed to a semi-transparent white background for the "glassmorphism" effect on scroll
           ? "bg-white shadow-lg shadow-black/20"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 py-4 flex justify-between items-center text-gray-700">
-        
-        {/* Logo with the new gradient */}
-        <a href="#home" className="text-2xl font-extrabold tracking-wide bg-gradient-to-r from-[#0d47a1] to-[#6a1b9a] text-transparent bg-clip-text hover:scale-110 transition-transform">
-          INCOIS
+
+        {/* Logo with image, larger size, responsiveness, and interactivity (no glow) */}
+        <a href="#home" className="flex items-center hover:scale-110 transition-transform">
+          <img
+            src={Logo}
+            alt="INCOIS Logo"
+            className="max-h-10 h-auto object-contain" // Increased max-h to 10 and removed glow classes
+          />
         </a>
 
         {/* Desktop Menu: Main Links (Center) */}
