@@ -5,8 +5,6 @@ import SignInForm from './signIn';
 import SignUpForm from './signUp';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 
-
-
 export default function AuthPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -25,18 +23,7 @@ export default function AuthPage() {
   return (
     <div className="bg-gradient-to-r from-purple-200 to-lavender-200 flex flex-col items-center justify-center min-h-screen p-4 font-sans">
       
-      {/* 2. Add the "Go Back" Link here */}
-      <Link
-        to="/"
-        aria-label="Go back to home page"
-        className="absolute top-6 left-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/30 text-gray-800 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/50"
-      >
-        {/* Simple back arrow SVG icon */}
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
-        </svg>
-      </Link>
-
+      {/* The main form card */}
       <div className="relative w-full max-w-sm md:max-w-4xl min-h-[580px] md:min-h-[500px] bg-white rounded-3xl shadow-2xl overflow-hidden">
         
         <SignUpForm isActive={isActive} onSignInClick={handleLoginClick} />
@@ -74,6 +61,18 @@ export default function AuthPage() {
         </div>
         
       </div>
+
+      {/* "Go Back" Link MOVED HERE, to the end of the container */}
+      <Link
+        to="/"
+        aria-label="Go back to home page"
+        className="absolute top-6 left-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/30 text-gray-800 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/50"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+        </svg>
+      </Link>
+
     </div>
   );
 }
