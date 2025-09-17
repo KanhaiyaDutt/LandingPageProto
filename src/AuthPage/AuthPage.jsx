@@ -3,30 +3,40 @@
 import React, { useState } from 'react';
 import SignInForm from './signIn';
 import SignUpForm from './signUp';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+
+
 
 export default function AuthPage() {
-  // 2. Get the current location and the navigate function
   const location = useLocation();
   const navigate = useNavigate();
-
-  // 3. Set the initial state based on the current URL path
-  // If the path is '/signup', isActive will be true, otherwise false.
   const [isActive, setIsActive] = useState(location.pathname === '/signup');
 
-  // 4. Update the click handlers to also change the URL
   const handleRegisterClick = () => {
     setIsActive(true);
-    navigate('/signup'); // Navigate to the signup URL
+    navigate('/signup');
   };
 
   const handleLoginClick = () => {
     setIsActive(false);
-    navigate('/signin'); // Navigate to the signin URL
+    navigate('/signin');
   };
 
   return (
     <div className="bg-gradient-to-r from-purple-200 to-lavender-200 flex flex-col items-center justify-center min-h-screen p-4 font-sans">
+      
+      {/* 2. Add the "Go Back" Link here */}
+      <Link
+        to="/"
+        aria-label="Go back to home page"
+        className="absolute top-6 left-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/30 text-gray-800 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white/50"
+      >
+        {/* Simple back arrow SVG icon */}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+        </svg>
+      </Link>
+
       <div className="relative w-full max-w-sm md:max-w-4xl min-h-[580px] md:min-h-[500px] bg-white rounded-3xl shadow-2xl overflow-hidden">
         
         <SignUpForm isActive={isActive} onSignInClick={handleLoginClick} />
